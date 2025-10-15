@@ -130,10 +130,10 @@ const Home = () => {
       <div>
         <div>
           {
-            <table>
-              <thead>
+            <table className="">
+              <thead className="">
                 <tr>
-                  <th>title</th>
+                  <th className="">title</th>
                   <th>author</th>
                   <th>publisher</th>
                   <th>language</th>

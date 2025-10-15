@@ -5,14 +5,9 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <nav className="">
-      <div className="">
-        <div className="">
-          <h1 className="">Book Inventory System</h1>
-          <h3 className="">Your Premium Book Collection Management</h3>
-        </div>
-      </div>
-    </nav>
+    <div className="bg-gray-800 text-white ">
+      <h1 className="text-lg px-20 py-12 font-bold h-32" >Book Inventory System</h1>
+    </div>
   );
 };
 
