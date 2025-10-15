@@ -87,8 +87,6 @@ const AddBook = ({ initialData, onSubmit, onCancel }) => {
     if (onSubmit) {
       onSubmit(formInputData);
     }
-
-    // Always clear form after submission
     setFormInputData({
       title: "",
       author: "",
