@@ -33,54 +33,53 @@ const BookPage = () => {
 
   if (!book) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="text-xl text-gray-600">Loading...</div>
+      <div className="flex justify-center items-center h-screen bg-slate-900">
+        <div className="text-xl text-slate-400">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
+    <div className="min-h-screen bg-slate-900 py-6 sm:py-8 px-3 sm:px-6">
       <div className="max-w-4xl mx-auto">
         <button 
           onClick={() => navigate(-1)}
-          className="mb-6 flex items-center gap-2 text-blue-600 hover:text-blue-800 font-semibold"
+          className="mb-6 px-5 py-2 bg-slate-700 text-emerald-400 hover:bg-slate-600 font-semibold rounded transition-colors border border-slate-600"
         >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-          Back to Store
+          ← Back to Store
         </button>
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">{book.title}</h1>
-          <p className="text-lg text-gray-600">by {book.author}</p>
-        </div>
-        <div className="grid md:grid-cols-2 gap-6 mb-6">
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-sm font-semibold text-gray-500 mb-2">Publisher</h3>
-            <p className="text-lg text-gray-800">{book.publisher}</p>
-          </div>
 
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-sm font-semibold text-gray-500 mb-2">Language</h3>
-            <p className="text-lg text-gray-800">{book.language}</p>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-sm font-semibold text-gray-500 mb-2">Pages</h3>
-            <p className="text-lg text-gray-800">{book.pages}</p>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-sm font-semibold text-gray-500 mb-2">Year</h3>
-            <p className="text-lg text-gray-800">{book.year}</p>
-          </div>
-        </div>
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">Overview</h2>
-          <p className="text-gray-700 leading-relaxed">{book.overview}</p>
+        <div className="bg-slate-800 rounded-lg shadow-lg p-5 sm:p-6 mb-6 border border-slate-700">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">{book.title}</h1>
+          <p className="text-base sm:text-lg text-slate-300">by {book.author}</p>
         </div>
 
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6">
+          <div className="bg-slate-800 rounded-lg shadow-lg p-5 border border-slate-700">
+            <h3 className="text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wide mb-2">Publisher</h3>
+            <p className="text-base sm:text-lg text-white">{book.publisher}</p>
+          </div>
+
+          <div className="bg-slate-800 rounded-lg shadow-lg p-5 border border-slate-700">
+            <h3 className="text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wide mb-2">Language</h3>
+            <p className="text-base sm:text-lg text-white">{book.language}</p>
+          </div>
+
+          <div className="bg-slate-800 rounded-lg shadow-lg p-5 border border-slate-700">
+            <h3 className="text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wide mb-2">Pages</h3>
+            <p className="text-base sm:text-lg text-white">{book.pages}</p>
+          </div>
+
+          <div className="bg-slate-800 rounded-lg shadow-lg p-5 border border-slate-700">
+            <h3 className="text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wide mb-2">Year</h3>
+            <p className="text-base sm:text-lg text-white">{book.year}</p>
+          </div>
+        </div>
+
+        <div className="bg-slate-800 rounded-lg shadow-lg p-5 sm:p-6 border border-slate-700">
+          <h2 className="text-lg sm:text-xl font-bold text-emerald-400 mb-4">Overview</h2>
+          <p className="text-slate-300 leading-relaxed">{book.overview}</p>
+        </div>
       </div>
     </div>
   );

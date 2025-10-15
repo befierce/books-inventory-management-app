@@ -102,79 +102,110 @@ const AddBook = ({ initialData, onSubmit }) => {
   };
 
   return (
-    <>
-      <div>
-        <h2>{initialData ? "Edit Book" : "Add Book"}</h2>
+    <div className="bg-slate-800 rounded-lg shadow-lg p-5 sm:p-6 border border-slate-700">
+      <div className="mb-6">
+        <h2 className="text-xl sm:text-2xl font-bold text-emerald-400">
+          {initialData ? "Edit Book" : "Add Book"}
+        </h2>
       </div>
       <form onSubmit={formSubmitHandler}>
-        <div>
-          <input
-            placeholder="title"
-            name="title"
-            value={formInputData.title}
-            onChange={formInputHandler}
-          ></input>
-          {errors.title && <p style={{ color: "red" }}>{errors.title}</p>}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+          <div>
+            <input
+              placeholder="Title"
+              name="title"
+              value={formInputData.title}
+              onChange={formInputHandler}
+              className="w-full px-4 py-3 bg-slate-700 text-white placeholder-slate-400 border border-slate-600 rounded focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors"
+            />
+            {errors.title && (
+              <p className="text-red-400 text-sm mt-1">{errors.title}</p>
+            )}
+          </div>
+          <div>
+            <input
+              placeholder="Author"
+              name="author"
+              value={formInputData.author}
+              onChange={formInputHandler}
+              className="w-full px-4 py-3 bg-slate-700 text-white placeholder-slate-400 border border-slate-600 rounded focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors"
+            />
+            {errors.author && (
+              <p className="text-red-400 text-sm mt-1">{errors.author}</p>
+            )}
+          </div>
+          <div>
+            <input
+              placeholder="Year"
+              name="year"
+              value={formInputData.year}
+              onChange={formInputHandler}
+              className="w-full px-4 py-3 bg-slate-700 text-white placeholder-slate-400 border border-slate-600 rounded focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors"
+            />
+            {errors.year && (
+              <p className="text-red-400 text-sm mt-1">{errors.year}</p>
+            )}
+          </div>
+          <div>
+            <input
+              placeholder="Pages"
+              name="pages"
+              value={formInputData.pages}
+              onChange={formInputHandler}
+              className="w-full px-4 py-3 bg-slate-700 text-white placeholder-slate-400 border border-slate-600 rounded focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors"
+            />
+            {errors.pages && (
+              <p className="text-red-400 text-sm mt-1">{errors.pages}</p>
+            )}
+          </div>
+          <div>
+            <input
+              placeholder="Publisher"
+              name="publisher"
+              value={formInputData.publisher}
+              onChange={formInputHandler}
+              className="w-full px-4 py-3 bg-slate-700 text-white placeholder-slate-400 border border-slate-600 rounded focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors"
+            />
+            {errors.publisher && (
+              <p className="text-red-400 text-sm mt-1">{errors.publisher}</p>
+            )}
+          </div>
+          <div>
+            <input
+              placeholder="Language"
+              name="language"
+              value={formInputData.language}
+              onChange={formInputHandler}
+              className="w-full px-4 py-3 bg-slate-700 text-white placeholder-slate-400 border border-slate-600 rounded focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors"
+            />
+            {errors.language && (
+              <p className="text-red-400 text-sm mt-1">{errors.language}</p>
+            )}
+          </div>
+          <div className="sm:col-span-2">
+            <textarea
+              placeholder="Overview"
+              name="overview"
+              value={formInputData.overview}
+              onChange={formInputHandler}
+              rows="4"
+              className="w-full px-4 py-3 bg-slate-700 text-white placeholder-slate-400 border border-slate-600 rounded focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors resize-none"
+            />
+            {errors.overview && (
+              <p className="text-red-400 text-sm mt-1">{errors.overview}</p>
+            )}
+          </div>
         </div>
-        <div>
-          <input
-            placeholder="author"
-            name="author"
-            value={formInputData.author}
-            onChange={formInputHandler}
-          ></input>
-          {errors.author && <p style={{ color: "red" }}>{errors.author}</p>}
+        <div className="mt-6">
+          <button
+            type="submit"
+            className="w-full sm:w-auto px-8 py-3 bg-emerald-600 text-white text-sm font-semibold rounded hover:bg-emerald-500 transition-colors duration-200"
+          >
+            {initialData ? "Update Book" : "Add Book"}
+          </button>
         </div>
-        <div>
-          <input
-            placeholder="year"
-            name="year"
-            value={formInputData.year}
-            onChange={formInputHandler}
-          ></input>
-          {errors.year && <p style={{ color: "red" }}>{errors.year}</p>}
-        </div>
-        <div>
-          <input
-            placeholder="pages"
-            name="pages"
-            value={formInputData.pages}
-            onChange={formInputHandler}
-          ></input>
-          {errors.pages && <p style={{ color: "red" }}>{errors.pages}</p>}
-        </div>
-        <div>
-          <input
-            placeholder="publisher"
-            name="publisher"
-            value={formInputData.publisher}
-            onChange={formInputHandler}
-          ></input>
-          {errors.publisher && (
-            <p style={{ color: "red" }}>{errors.publisher}</p>
-          )}
-        </div>
-        <div>
-          <input
-            placeholder="language"
-            name="language"
-            value={formInputData.language}
-            onChange={formInputHandler}
-          ></input>
-          {errors.language && <p style={{ color: "red" }}>{errors.language}</p>}
-        </div>
-        <div>
-          <input
-            placeholder="overview"
-            name="overview"
-            value={formInputData.overview}
-            onChange={formInputHandler}
-          ></input>
-          {errors.overview && <p style={{ color: "red" }}>{errors.overview}</p>}
-        </div>
-        <button type="submit">{initialData ? "Update" : "Submit"}</button>
       </form>
-    </>
+    </div>
   );
 };
 
