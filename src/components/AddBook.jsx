@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const AddBook = ({ initialData, onSubmit }) => {
+const AddBook = ({ initialData, onSubmit, onCancel }) => {
   const [formInputData, setFormInputData] = useState({
     title: "",
     author: "",
@@ -12,6 +12,7 @@ const AddBook = ({ initialData, onSubmit }) => {
   });
 
   const [errors, setErrors] = useState({});
+  
   useEffect(() => {
     if (initialData) {
       setFormInputData({
@@ -87,18 +88,17 @@ const AddBook = ({ initialData, onSubmit }) => {
       onSubmit(formInputData);
     }
 
-    if (!initialData) {
-      setFormInputData({
-        title: "",
-        author: "",
-        year: "",
-        pages: "",
-        publisher: "",
-        language: "",
-        overview: "",
-      });
-      setErrors({});
-    }
+    // Always clear form after submission
+    setFormInputData({
+      title: "",
+      author: "",
+      year: "",
+      pages: "",
+      publisher: "",
+      language: "",
+      overview: "",
+    });
+    setErrors({});
   };
 
   return (
@@ -203,6 +203,15 @@ const AddBook = ({ initialData, onSubmit }) => {
           >
             {initialData ? "Update Book" : "Add Book"}
           </button>
+          {initialData && onCancel && (
+            <button
+              type="button"
+              onClick={onCancel}
+              className="w-full sm:w-auto px-8 py-3 ml-0 sm:ml-3 mt-3 sm:mt-0 bg-slate-600 text-white text-sm font-semibold rounded hover:bg-slate-500 transition-colors duration-200"
+            >
+              Cancel
+            </button>
+          )}
         </div>
       </form>
     </div>
