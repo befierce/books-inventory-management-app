@@ -35,7 +35,6 @@ const BookPage = () => {
     fetchData();
   }, [id]);
 
-
   if (!book) {
     return <div style={{ padding: "20px" }}>Loading...</div>;
   }
@@ -43,24 +42,12 @@ const BookPage = () => {
   return (
     <div style={{ padding: "20px" }}>
       <h2>{book.title}</h2>
-      <p>
-        <strong>Author:</strong> {book.author}
-      </p>
-      <p>
-        <strong>Publisher:</strong> {book.publisher}
-      </p>
-      <p>
-        <strong>Language:</strong> {book.language}
-      </p>
-      <p>
-        <strong>Pages:</strong> {book.pages}
-      </p>
-      <p>
-        <strong>Year:</strong> {book.year}
-      </p>
-      <p>
-        <strong>Overview:</strong> {book.overview}
-      </p>
+      <p>Author: {book.author}</p>
+      <p>Publisher: {book.publisher}</p>
+      <p>Language: {book.language}</p>
+      <p>Pages: {book.pages}</p>
+      <p>Year: {book.year}</p>
+      <p>Overview: {book.overview}</p>
     </div>
   );
 };
