@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import Input from "./ui/Input";
+import TextArea from "./ui/TextArea";
 
 const AddBook = ({ initialData, onSubmit, onCancel }) => {
   const [formInputData, setFormInputData] = useState({
@@ -115,94 +117,66 @@ const AddBook = ({ initialData, onSubmit, onCancel }) => {
       </div>
       <form onSubmit={formSubmitHandler}>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-          <div>
-            <input
-              placeholder="Title"
-              name="title"
-              value={formInputData.title}
-              onChange={formInputHandler}
-              className="w-full px-4 py-3 bg-slate-700 text-white placeholder-slate-400 border border-slate-600 rounded focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors"
-            />
-            {errors.title && (
-              <p className="text-red-400 text-sm mt-1">{errors.title}</p>
-            )}
-          </div>
-          <div>
-            <input
-              placeholder="Author"
-              name="author"
-              value={formInputData.author}
-              onChange={formInputHandler}
-              className="w-full px-4 py-3 bg-slate-700 text-white placeholder-slate-400 border border-slate-600 rounded focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors"
-            />
-            {errors.author && (
-              <p className="text-red-400 text-sm mt-1">{errors.author}</p>
-            )}
-          </div>
-          <div>
-            <input
-              placeholder="Year"
-              name="year"
-              type="number"
-              value={formInputData.year}
-              onChange={formInputHandler}
-              className="w-full px-4 py-3 bg-slate-700 text-white placeholder-slate-400 border border-slate-600 rounded focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors"
-            />
-            {errors.year && (
-              <p className="text-red-400 text-sm mt-1">{errors.year}</p>
-            )}
-          </div>
-          <div>
-            <input
-              placeholder="Pages"
-              type="number"
-              name="pages"
-              value={formInputData.pages}
-              onChange={formInputHandler}
-              className="w-full px-4 py-3 bg-slate-700 text-white placeholder-slate-400 border border-slate-600 rounded focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors"
-            />
-            {errors.pages && (
-              <p className="text-red-400 text-sm mt-1">{errors.pages}</p>
-            )}
-          </div>
-          <div>
-            <input
-              placeholder="Publisher"
-              name="publisher"
-              value={formInputData.publisher}
-              onChange={formInputHandler}
-              className="w-full px-4 py-3 bg-slate-700 text-white placeholder-slate-400 border border-slate-600 rounded focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors"
-            />
-            {errors.publisher && (
-              <p className="text-red-400 text-sm mt-1">{errors.publisher}</p>
-            )}
-          </div>
-          <div>
-            <input
-              placeholder="Language"
-              name="language"
-              value={formInputData.language}
-              onChange={formInputHandler}
-              className="w-full px-4 py-3 bg-slate-700 text-white placeholder-slate-400 border border-slate-600 rounded focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors"
-            />
-            {errors.language && (
-              <p className="text-red-400 text-sm mt-1">{errors.language}</p>
-            )}
-          </div>
-          <div className="sm:col-span-2">
-            <textarea
-              placeholder="Overview"
-              name="overview"
-              value={formInputData.overview}
-              onChange={formInputHandler}
-              rows="4"
-              className="w-full px-4 py-3 bg-slate-700 text-white placeholder-slate-400 border border-slate-600 rounded focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors resize-none"
-            />
-            {errors.overview && (
-              <p className="text-red-400 text-sm mt-1">{errors.overview}</p>
-            )}
-          </div>
+          <Input
+            name="title"
+            value={formInputData.title}
+            onChange={formInputHandler}
+            placeholder="Title"
+            error={errors.title}
+          />
+
+          <Input
+            name="author"
+            value={formInputData.author}
+            onChange={formInputHandler}
+            placeholder="Author"
+            error={errors.author}
+          />
+
+          <Input
+            name="year"
+            type="number"
+            value={formInputData.year}
+            onChange={formInputHandler}
+            placeholder="Year"
+            error={errors.year}
+          />
+
+          <Input
+            name="pages"
+            type="number"
+            value={formInputData.pages}
+            onChange={formInputHandler}
+            placeholder="Pages"
+            error={errors.pages}
+          />
+
+          <Input
+            name="publisher"
+            value={formInputData.publisher}
+            onChange={formInputHandler}
+            placeholder="Publisher"
+            error={errors.publisher}
+          />
+
+          <Input
+            name="language"
+            value={formInputData.language}
+            onChange={formInputHandler}
+            placeholder="Language"
+            error={errors.language}
+          />
+
+          <TextArea
+            name="overview"
+            value={formInputData.overview}
+            onChange={formInputHandler}
+            placeholder="Overview"
+            rows="4"
+            error={errors.overview}
+          />
         </div>
+
         <div className="mt-6">
           <button
             type="submit"
