@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AddBook from "../components/AddBook";
+import Modal from "../components/ui/Modal";
 
 const Home = () => {
   const [books, setBooks] = useState([]);
@@ -13,6 +14,11 @@ const Home = () => {
     const bookToEdit = books.find((book) => book.id === id);
     setBookToBeEdited(bookToEdit);
     setIsAddBookOpen(true);
+  };
+
+  const closeModalHandler = () => {
+    setIsAddBookOpen(false);
+    setBookToBeEdited(null);
   };
 
   const deleteBookDataHandler = async (id) => {
@@ -35,28 +41,41 @@ const Home = () => {
 
   useEffect(() => {
     const fetchBooks = async () => {
-      const response = await fetch(
-        "https://firestore.googleapis.com/v1/projects/book-inventory-managemen-ebcf6/databases/(default)/documents/books",
-        {
-          method: "GET",
+      try {
+        const response = await fetch(
+          "https://firestore.googleapis.com/v1/projects/book-inventory-managemen-ebcf6/databases/(default)/documents/books",
+          {
+            method: "GET",
+          }
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
         }
-      );
-      const data = await response.json();
-      console.log("response from firebase url after recieving the data", data);
-      if (data.documents) {
+
+        const data = await response.json();
+
+        if (!data.documents || !Array.isArray(data.documents)) {
+          throw new Error("Invalid data structure received from server");
+        }
+
         const formattedBooks = data.documents.map((doc) => ({
-          id: doc.name.split("/").pop(),
-          title: doc.fields.title?.stringValue || "",
-          author: doc.fields.author?.stringValue || "",
-          year: doc.fields.year?.integerValue || "",
-          pages: doc.fields.pages?.integerValue || "",
-          publisher: doc.fields.publisher?.stringValue || "",
-          language: doc.fields.language?.stringValue || "",
-          overview: doc.fields.overview?.stringValue || "",
+          id: doc.name?.split("/").pop() || "",
+          title: doc.fields?.title?.stringValue || "",
+          author: doc.fields?.author?.stringValue || "",
+          year: doc.fields?.year?.integerValue || "",
+          pages: doc.fields?.pages?.integerValue || "",
+          publisher: doc.fields?.publisher?.stringValue || "",
+          language: doc.fields?.language?.stringValue || "",
+          overview: doc.fields?.overview?.stringValue || "",
         }));
+
         setBooks(formattedBooks);
+        console.log("Books data fetched successfully:", formattedBooks);
+      } catch (error) {
+        console.error("Failed to fetch books data from server", error.message);
       }
     };
+
     fetchBooks();
   }, []);
 
@@ -114,11 +133,11 @@ const Home = () => {
           language: doc.fields.language?.stringValue || "",
           overview: doc.fields.overview?.stringValue || "",
         }));
-        console.log("data is updated succress");
+        console.log("data is updated success");
         setBooks(formattedBooks);
       }
 
-      setBookToBeEdited(null);
+      closeModalHandler();
     } catch (err) {
       console.log(err);
     }
@@ -137,42 +156,29 @@ const Home = () => {
             </p>
           </div>
         </div>
+
         <div className="mb-6 sm:mb-8">
-          <div className="bg-slate-800 rounded-lg shadow-lg overflow-hidden border border-slate-700">
-            <button
-              onClick={() => setIsAddBookOpen(!isAddBookOpen)}
-              className="w-full px-5 sm:px-6 py-4 flex items-center justify-between bg-gradient-to-r from-slate-700 to-slate-600 hover:from-slate-600 hover:to-slate-500 transition-all duration-200"
-            >
-              <h2 className="text-lg sm:text-xl font-semibold text-white">
+          <button
+            onClick={() => setIsAddBookOpen(true)}
+            className="w-full px-6 py-4 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-semibold rounded-lg shadow-lg transition-all duration-200 text-lg"
+          >
+            + Add New Book
+          </button>
+        </div>
+
+        {isAddBookOpen && (
+          <Modal onClose={closeModalHandler}>
+            <div className="p-6">
+              <h2 className="text-xl font-semibold text-white mb-4">
                 {bookToBeEdited ? "Edit Book" : "Add New Book"}
               </h2>
-              <svg
-                className={`w-5 h-5 text-white transform transition-transform duration-200 ${
-                  isAddBookOpen ? "rotate-180" : ""
-                }`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
-            </button>
-            <div
-              className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                isAddBookOpen ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
-              }`}
-            >
-              <div className="p-5 sm:p-6">
-                <AddBook initialData={bookToBeEdited} onSubmit={formSubmitHandler} />
-              </div>
+              <AddBook
+                initialData={bookToBeEdited}
+                onSubmit={formSubmitHandler}
+              />
             </div>
-          </div>
-        </div>
+          </Modal>
+        )}
         <div className="bg-slate-800 rounded-lg shadow-lg overflow-hidden border border-slate-700">
           <div className="px-4 sm:px-6 py-4 bg-gradient-to-r from-slate-700 to-slate-600 border-b border-slate-600">
             <h2 className="text-lg sm:text-xl font-semibold text-white">
