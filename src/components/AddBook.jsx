@@ -12,7 +12,7 @@ const AddBook = ({ initialData, onSubmit, onCancel }) => {
   });
 
   const [errors, setErrors] = useState({});
-  
+
   useEffect(() => {
     if (initialData) {
       setFormInputData({
@@ -33,6 +33,13 @@ const AddBook = ({ initialData, onSubmit, onCancel }) => {
     setFormInputData((prev) => {
       return { ...prev, [name]: value };
     });
+    if (errors[name]) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
+    }
   };
 
   const formValidation = () => {
