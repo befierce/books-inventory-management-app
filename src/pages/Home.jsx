@@ -6,11 +6,13 @@ const Home = () => {
   const [books, setBooks] = useState([]);
   const navigate = useNavigate();
   const [bookToBeEdited, setBookToBeEdited] = useState(null);
+  const [isAddBookOpen, setIsAddBookOpen] = useState(false);
 
   const editBookDataHandler = (id) => {
     console.log("id of the book to be edited", id);
     const bookToEdit = books.find((book) => book.id === id);
     setBookToBeEdited(bookToEdit);
+    setIsAddBookOpen(true);
   };
 
   const deleteBookDataHandler = async (id) => {
@@ -136,7 +138,40 @@ const Home = () => {
           </div>
         </div>
         <div className="mb-6 sm:mb-8">
-          <AddBook initialData={bookToBeEdited} onSubmit={formSubmitHandler} />
+          <div className="bg-slate-800 rounded-lg shadow-lg overflow-hidden border border-slate-700">
+            <button
+              onClick={() => setIsAddBookOpen(!isAddBookOpen)}
+              className="w-full px-5 sm:px-6 py-4 flex items-center justify-between bg-gradient-to-r from-slate-700 to-slate-600 hover:from-slate-600 hover:to-slate-500 transition-all duration-200"
+            >
+              <h2 className="text-lg sm:text-xl font-semibold text-white">
+                {bookToBeEdited ? "Edit Book" : "Add New Book"}
+              </h2>
+              <svg
+                className={`w-5 h-5 text-white transform transition-transform duration-200 ${
+                  isAddBookOpen ? "rotate-180" : ""
+                }`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+            <div
+              className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                isAddBookOpen ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
+              }`}
+            >
+              <div className="p-5 sm:p-6">
+                <AddBook initialData={bookToBeEdited} onSubmit={formSubmitHandler} />
+              </div>
+            </div>
+          </div>
         </div>
         <div className="bg-slate-800 rounded-lg shadow-lg overflow-hidden border border-slate-700">
           <div className="px-4 sm:px-6 py-4 bg-gradient-to-r from-slate-700 to-slate-600 border-b border-slate-600">

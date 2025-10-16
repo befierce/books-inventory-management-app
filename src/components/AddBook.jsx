@@ -143,6 +143,7 @@ const AddBook = ({ initialData, onSubmit, onCancel }) => {
             <input
               placeholder="Year"
               name="year"
+              type="number"
               value={formInputData.year}
               onChange={formInputHandler}
               className="w-full px-4 py-3 bg-slate-700 text-white placeholder-slate-400 border border-slate-600 rounded focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors"
@@ -154,6 +155,7 @@ const AddBook = ({ initialData, onSubmit, onCancel }) => {
           <div>
             <input
               placeholder="Pages"
+              type="number"
               name="pages"
               value={formInputData.pages}
               onChange={formInputHandler}
