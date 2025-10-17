@@ -19,6 +19,7 @@ const BookPage = () => {
 
         const data = await response.json();
 
+        
         if (data.fields) {
           const book = {
             title: data.fields.title?.stringValue,

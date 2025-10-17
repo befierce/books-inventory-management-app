@@ -23,6 +23,7 @@ const Modal = ({ children, onClose }) => {
             </svg>
           </button>
 
+
           {children}
         </div>
       </div>

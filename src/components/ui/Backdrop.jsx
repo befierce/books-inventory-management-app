@@ -7,4 +7,5 @@ const Backdrop = ({ onClick }) => {
   );
 };
 
+
 export default Backdrop;
