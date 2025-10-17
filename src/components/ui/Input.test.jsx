@@ -85,4 +85,17 @@ describe("Input Component Tests", () => {
     const inputElement = screen.getByPlaceholderText("Password");
     expect(inputElement).toHaveAttribute("type", "password");
   });
+   it('should have correct name attribute', () => {
+    render(
+      <Input 
+        name="userEmail" 
+        placeholder="Email" 
+        value="" 
+        onChange={() => {}} 
+      />
+    );
+    
+    const inputElement = screen.getByPlaceholderText('Email');
+    expect(inputElement).toHaveAttribute('name', 'userEmail');
+  });
 });
